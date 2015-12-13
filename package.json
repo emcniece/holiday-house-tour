@@ -6,6 +6,7 @@
   "dependencies": {
     "Leaflet.vector-markers": "git+https://github.com/hiasinho/Leaflet.vector-markers.git",
     "angular": "^1.4.4",
+    "angular-simple-logger": "^0.1.5",
     "angular-ui-router": "^0.2.15",
     "angularfire": "^1.1.3",
     "leaflet.markercluster": "^0.4.0",
