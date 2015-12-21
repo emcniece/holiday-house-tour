@@ -11,17 +11,26 @@ let mapComponent = function () {
     controllerAs: 'vm',
     bindToController: true,
     link: function (scope, el, attr, vm){
-      angular.extend(scope, {
-        center: {
-            lat: 51.505,
-            lng: -0.09,
-            zoom: 5
-        },
-        markers: [{
-            lat: 51.505,
-            lng: -0.09,
-            message: 'Hi!'
-        }]
+
+      // Extract injections from vm
+      var $http = vm.$http;
+
+      var url = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_month.geojson";
+      $http.get(url).success(function(response) {
+        var points =  response.features.map(function(d) {
+          return {
+            //layer: "earthquake",
+            lat: d.geometry.coordinates[1],
+            lng: d.geometry.coordinates[0],
+            message: d.id
+          };
+        });
+
+        console.log(points.length);
+
+        angular.extend(scope, {
+          markers: points
+        });
       });
 
     }
